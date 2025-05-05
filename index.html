@@ -21,6 +21,7 @@
 
 <body>
 
+    <h1>Working with Geolocations Using Leaflet JS</h1>
     <div id="map"></div>
 
     <script>
@@ -30,7 +31,6 @@
             console.log(`Date: ${currentDateTime}`)
 
             if (navigator.geolocation) {
-
                 navigator.geolocation.getCurrentPosition((position) => {
                     const lat = position.coords.latitude;
                     const lng = position.coords.longitude;
