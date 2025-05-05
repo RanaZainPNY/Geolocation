@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <script>
+        geolocationSuccess = (position) => {
+            // get current date for the location
+            currentDateTime = new Date(position.timestamp);
+            console.log(`Date: ${currentDateTime}`)
+
+            if (navigator.geolocation) {
+
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    const map = L.map('map').setView([lat, lng], 25);
+
+                    console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    L.marker([lat, lng])
+                        .addTo(map)
+                        .bindPopup('Your Accurate Location')
+                        .openPopup();
+
+
+                }, (error) => {
+                    console.error('Geolocation error:', error);
+                    alert("Unable to retrieve your location.");
+                });
+            } else {
+                alert("Geolocation not supported by this browser.");
+            }
+        }
+
+        geolocationError = (error) => {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
+    </script>
+
+</body>
+
+</html>

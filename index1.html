@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #parent {
+            display: flex;
+            width: 800px;
+            height: 400px;
+        }
+
+        .left {
+            width: 50%;
+            background-color: yellow;
+
+        }
+
+        .right {
+            width: 50%;
+            background-color: blue;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top {
+            flex: 1;
+            background-color: red;
+            display: flex;
+        }
+
+        .bottom {
+            flex: 1;
+            background-color: orange;
+            display: flex;
+        }
+
+        .top-left {
+            background-color: green;
+            flex: 1;
+        }
+
+        .top-right {
+            flex: 1;
+            background-color: magenta;
+        }
+
+        .bottom-left {
+            flex: 1;
+            background-color: blue;
+        }
+
+        .bottom-right {
+            flex: 1;
+            background-color: khaki;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Using FlexBox</h1>
+    <div id="parent">
+        <div class="left"></div>
+        <div class="right">
+            <div class="top">
+                <div class="top-left">
+                </div>
+                <div class="top-right"></div>
+            </div>
+            <div class="bottom">
+                <div class="bottom-left"></div>
+                <div class="bottom-right"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

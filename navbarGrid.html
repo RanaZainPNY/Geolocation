@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100  border border-red-500 border-3">
+
+    <nav class="bg-white shadow p-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-3 items-center">
+            <!-- Left: Logo -->
+            <div class="text-xl font-bold text-blue-600 ">My Brand</div>
+
+            <!-- Center: Nav Links -->
+            <div class="flex justify-center space-x-4 ">
+                <a href="" class="text-gray-600 hover:text-blue-500">Home</a>
+                <a href="" class="text-gray-600 hover:text-blue-500">About</a>
+                <a href="" class="text-gray-600 hover:text-blue-500">Services</a>
+                <a href="" class="text-gray-600 hover:text-blue-500">Contact</a>
+            </div>
+
+            <!-- Right: Profile Login -->
+            <div class="flex justify-end space-x-4">
+                <button class="text-gray-600 hover:text-blue-500">Login</button>
+                <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Sign Up</button>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- <main class="grid grid-cols-16 grid-rows-1 h-full bg-blue-500">
+        <aside class="col-span-4 bg-[red]"></aside>
+        <aside class="col-span-8 bg-[blue]"></aside>
+        <aside class="col-span-4 bg-[yellow]"></aside>
+    </main> -->
+    <main class="grid grid-cols-12 grid-rows-1 h-[700px] ">
+        <div class="col-span-2 bg-red-500"></div>
+        <div class="col-span-8 bg-blue-500"></div>
+        <div class="col-span-2 bg-yellow-500"></div>
+    </main>
+
+    <div class="w-full grid grid-cols-3 grid-rows-3 h-[300px] gap-3 box-border p-3">
+        <div class="border bg-blue-500 hover:bg-blue-600 flex justify-center items-center" id="one">01</div>
+        <div class="border bg-blue-500 hover:bg-blue-600 flex justify-center items-center" id="two">02</div>
+        <div class="border bg-blue-500 hover:bg-blue-600 flex justify-center items-center" id="three">03</div>
+        <div class="border bg-blue-500 hover:bg-blue-600 flex justify-center items-center" id="four">04</div>
+        <div class="border bg-blue-500 hover:bg-blue-600 flex justify-center items-center" id="five">05</div>
+        <div class="border bg-blue-500 hover:bg-blue-600 flex justify-center items-center" id="six">06</div>
+        <div class="border bg-blue-500 hover:bg-blue-600 flex justify-center items-center" id="seven">07</div>
+    </div>
+
+
+</body>
+
+</html>
