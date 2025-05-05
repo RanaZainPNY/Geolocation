@@ -1,67 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <!-- Leaflet CSS -->
+    <title>Live Location on Click</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
         #map {
-            height: 500px;
+            height: 90vh;
             width: 100%;
+        }
+
+        #get-location {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0px;
+        }
+
+        #get-location:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Working with Geolocations Using Leaflet JS</h1>
+    <button id="get-location">📍 Get Fresh Location</button>
     <div id="map"></div>
 
     <script>
-        geolocationSuccess = (position) => {
-            // get current date for the location
-            currentDateTime = new Date(position.timestamp);
-            console.log(`Date: ${currentDateTime}`)
+        let map;
+        let marker;
 
+        const getLocation = () => {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    const map = L.map('map').setView([lat, lng], 25);
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
 
-                    console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+                        if (!map) {
+                            // Initialize map only once
+                            map = L.map('map').setView([lat, lon], 15);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; OpenStreetMap contributors'
+                            }).addTo(map);
+                        } else {
+                            map.setView([lat, lon], 15);
+                        }
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; OpenStreetMap contributors'
-                    }).addTo(map);
+                        if (marker) {
+                            marker.setLatLng([lat, lon]);
+                        } else {
+                            marker = L.marker([lat, lon]).addTo(map);
+                        }
 
-                    L.marker([lat, lng])
-                        .addTo(map)
-                        .bindPopup('Your Accurate Location')
-                        .openPopup();
-
-
-                }, (error) => {
-                    console.error('Geolocation error:', error);
-                    alert("Unable to retrieve your location.");
-                });
+                        marker.bindPopup('Fresh Location!').openPopup();
+                    },
+                    (error) => {
+                        alert("Error getting location: " + error.message);
+                        console.error(error);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 0 // Important: don't use cached location
+                    }
+                );
             } else {
-                alert("Geolocation not supported by this browser.");
+                alert("Geolocation is not supported by your browser.");
             }
-        }
+        };
 
-        geolocationError = (error) => {
-            console.warn(`ERROR(${err.code}): ${err.message}`);
-        }
-
-        navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
+        document.getElementById("get-location").addEventListener("click", getLocation);
     </script>
 
 </body>
